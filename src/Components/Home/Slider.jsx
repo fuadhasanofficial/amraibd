@@ -1,78 +1,71 @@
 import React, { useEffect, useState } from "react";
 
 const Slider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const slides = [
+  const images = [
     {
-      url: "https://i.ibb.co.com/j3qhyvy/IMG-20241020-WA0006.jpg",
-      title: "Slide 1",
+      url: "https://i.ibb.co/j3qhyvy/IMG-20241020-WA0006.jpg",
+      title: "উত্তরবঙ্গে বন্যার্তদের পাশে আমরাই বাংলাদেশ এর সদস্যবৃন্দ ",
     },
     {
-      url: "https://i.ibb.co.com/xCJCf2H/IMG-20241021-WA0017.jpg",
-      title: "Slide 2",
+      url: "https://i.ibb.co/xCJCf2H/IMG-20241021-WA0017.jpg",
+      title:
+        "মানিকগঞ্জে নবাগত জেলা-প্রশাসক মহোদয় কে  আমরাই বাংলাদেশ এর পক্ষ হতে  কার্যক্রমের অনুলিপি প্রদান ",
     },
     {
-      url: "https://i.ibb.co.com/bKm8t7b/IMG-20241021-WA0027.jpg",
-      title: "Slide 3",
+      url: "https://i.ibb.co/bKm8t7b/IMG-20241021-WA0027.jpg",
+      title: "মানিকগঞ্জ পৌরসভার পরিচ্ছন্নতা অভিযানে আমরাই বাংলাদেশের অংশগ্রহণ",
     },
   ];
 
-  const prevSlide = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
-
-  const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 3000); // Auto-slide every 3 seconds
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [currentIndex]); // Dependency to track changes in currentIndex
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+    );
+  };
 
   return (
-    <div className="lg:w-[75%] mx-auto w-full h-64 md:h-96 relative group">
-      {/* Slide */}
-      <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className="w-full h-full bg-center bg-cover duration-500"
-      ></div>
+    <div className="relative w-full lg:w-[75%] h-64 lg:h-[500px]  mx-auto overflow-hidden">
+      {/* Background Image */}
+      <img
+        src={images[currentIndex].url}
+        alt={images[currentIndex].title}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black opacity-30" />
+      {/* Low opacity background */}
+      <div className="absolute bottom-5  text-white bg-black p-6  bg-opacity-50 w-full">
+        <h2 className="text-center text-sm lg:text-2xl font-bold">
+          {images[currentIndex].title}
+        </h2>
+      </div>
 
-      {/* Left Arrow */}
-      <div
-        className="hidden group-hover:block absolute top-1/2 left-5 transform -translate-y-1/2 text-2xl text-white cursor-pointer bg-black bg-opacity-50 rounded-full p-2"
-        onClick={prevSlide}
+      {/* Navigation Buttons */}
+      <button
+        onClick={handlePrevious}
+        className="absolute top-1/2 left-5 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 rounded-full p-2 hover:bg-gray-700"
       >
-        &#10094;
-      </div>
-
-      {/* Right Arrow */}
-      <div
-        className="hidden group-hover:block absolute top-1/2 right-5 transform -translate-y-1/2 text-2xl text-white cursor-pointer bg-black bg-opacity-50 rounded-full p-2"
-        onClick={nextSlide}
+        &lt; {/* Left Arrow */}
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute top-1/2 right-5 transform -translate-y-1/2 text-white bg-gray-800 bg-opacity-50 rounded-full p-2 hover:bg-gray-700"
       >
-        &#10095;
-      </div>
-
-      {/* Indicator Dots */}
-      <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`cursor-pointer h-3 w-3 rounded-full bg-white ${
-              currentIndex === index ? "bg-opacity-100" : "bg-opacity-50"
-            }`}
-          ></div>
-        ))}
-      </div>
+        &gt; {/* Right Arrow */}
+      </button>
     </div>
   );
 };

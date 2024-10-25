@@ -5,7 +5,7 @@ import Navbar from "../Components/Navbar";
 
 const Main = () => {
   return (
-    <div>
+    <div data-theme="ligth">
       <Navbar />
       <Home />
     </div>
