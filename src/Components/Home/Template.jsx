@@ -25,7 +25,8 @@ const StickySocialLinks = () => {
             </li>
             <li>
               <a
-                href="https://wa.me/yourwhatsappnumber"
+                href="https://wa.me/8801876581210?text=Hello%2C%20I%20need%20help%21
+"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-r-full hover:bg-green-600 transition-colors"
