@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import React, { useState } from "react";
+
 import LOGO from "../assets/460501538_122116695884475122_5254163446392055715_n.jpg";
 
 const Navbar = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
               className="lg:h-40 lg:w-40 w-10 h-10 rounded-full"
             />
             <div>
-              <h1 className="text-xl font-bold">আমরাই বাংলাদেশ</h1>
+              <h1 className="text-xl font-bold solaiman">আমরাই বাংলাদেশ</h1>
               <p className="text-sm text-gray-300 hidden sm:block">
                 একটি সেবামূলক সংগঠন
               </p>

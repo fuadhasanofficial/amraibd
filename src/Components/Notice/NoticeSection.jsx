@@ -5,6 +5,7 @@ const notices = [
     id: 1,
     title:
       "আগামী রবিবার, ২৭ তারিখ, পথ শিশু দের পূর্ণবাসন করা প্রসঙ্গে জেলা প্রশাসক মানিকগঞ্জ বরাবর স্বারকলিপি প্রদান প্রসঙ্গে",
+    link: "https://drive.google.com/file/d/1miOSJvp4Vugf3JLnKJamfptocC05AfTC/view?usp=sharing",
   },
   // You can add more notices here
 ];
@@ -67,7 +68,7 @@ const NoticeSection = () => {
               </td>
               <td className="py-2 px-4 border-b">
                 <a
-                  href="#"
+                  href={notice.link}
                   className="flex items-center text-blue-600 hover:text-blue-800 text-lg font-semibold transition duration-200"
                 >
                   {notice.title}
